@@ -14,7 +14,7 @@
   "keywords": [
     "repl",
     "gulp",
-    "gulpfriendly",
+    "gulpplugin",
     "readline"
   ],
   "author": "Javier Carrillo <stringparser@gmail.com>",
