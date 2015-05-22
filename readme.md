@@ -42,7 +42,7 @@ foo      bar      default
 #### gulp.repl
 
 The module adds a `gulp.repl` property to the `gulp` instance. This
-property is a readline instance. [See node core `realine` module  documentation][readline] for more detail on its methods.
+property is a readline instance. [See node core `realine` module  documentation](https://nodejs.org/api/readline.html) for more detail on its methods.
 
 ### install
 
