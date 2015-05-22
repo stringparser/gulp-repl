@@ -1,9 +1,12 @@
 ## gulp-repl [![build][b-build]][x-travis][![NPM version][b-version]][gulp-repl]
 
+Simple repl for gulp compatible with gulp#3.x and the future gulp#4.x.
+
 ### usage
 
 ```js
-var gulp = require('gulp-repl');
+var gulp = require('gulp');
+var repl = require('gulp-repl');
 
 gulp.task('foo', function (cb) {
 	// do foo stuff
@@ -18,11 +21,11 @@ gulp.task('bar', function (cb) {
 gulp.task('default');
 ```
 
-then, on your terminal you'll have a repl. Press
+Then, on your terminal, you'll have a repl
 
-1. <kbd>Enter</kbd> to see the prompt
+1. Press <kbd>Enter</kbd> to see the prompt
 1. write the tasks you want to run
-1. or <kbd>Tab</kbd> to see completion
+1. Press <kbd>Tab</kbd> for completion
 
 ```
 $ gulp
@@ -39,10 +42,7 @@ foo      bar      default
 
 ### API
 
-#### gulp.repl
-
-The module adds a `gulp.repl` property to the `gulp` instance. This
-property is a readline instance. [See node core `realine` module  documentation](https://nodejs.org/api/readline.html) for more detail on its methods.
+The module exports a readline instance. [See node core module `realine` documentation](https://nodejs.org/api/readline.html) for more detail on its methods.
 
 ### install
 
