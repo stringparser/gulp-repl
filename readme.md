@@ -14,6 +14,8 @@ gulp.task('bar', function (cb) {
 	// do bar stuff
 	cb();
 });
+
+gulp.task('default');
 ```
 
 then, on your terminal you'll have a repl. Press
@@ -24,9 +26,11 @@ then, on your terminal you'll have a repl. Press
 
 ```
 $ gulp
-$ # some task logging here
-$ (press Enter)
-$ > foo bar
+... some task logging here
+(press Enter)
+> (press Tab to see completion)
+foo      bar      default
+> foo bar
 [10:39:11] Starting 'foo'...
 [10:39:11] Finished 'foo' after 13 μs
 [10:39:11] Starting 'bar'...
