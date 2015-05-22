@@ -1,5 +1,7 @@
 'use strict';
 
+// just in case is not used after gulp/bin
+//
 try {
   var gulp = require('gulp');
 } catch (err){
@@ -14,17 +16,17 @@ var completer = require('./lib/completer');
 
 // create a simple readline interface
 //
-gulp.repl = readline.createInterface({
+var repl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
-  completer: function(line){
+  completer: function completion(line){
     return completer(gulp, line);
   }
 });
 
 // dispatch tasks only if line wasn't empty
 //
-gulp.repl.on('line', function(line){
+repl.on('line', function onLine(line){
   line = line.trim();
   if(!line){ return gulp.repl.prompt(); }
   var runner = gulp.parallel || gulp.start;
@@ -34,4 +36,4 @@ gulp.repl.on('line', function(line){
   }
 });
 
-exports = module.exports = gulp;
+exports = module.exports = repl;
