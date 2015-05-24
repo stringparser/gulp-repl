@@ -1,10 +1,10 @@
 {
   "name": "gulp-repl",
-  "version": "0.2.1",
+  "version": "0.2.0",
   "description": "a simple repl for gulp",
   "main": "index.js",
   "scripts": {
-    "lint": "jshint lib index.js --reporter node_modules/jshint-stylish/stylish.js --exclude node_modules",
+    "lint": "jshint lib index.js --exclude ./node_modules",
     "test": "npm run-script lint && mocha test"
   },
   "repository": {
@@ -29,7 +29,6 @@
   "devDependencies": {
     "gulp": "^3.x",
     "jshint": "*",
-    "jshint-stylish": "*",
     "mocha": "*",
     "should": "*"
   }
