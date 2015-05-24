@@ -5,6 +5,7 @@ Simple repl for gulp compatible with gulp#3.x and the future gulp#4.x.
 ### usage
 
 ```js
+// gulpfile example
 var gulp = require('gulp');
 var repl = require('gulp-repl');
 
@@ -42,7 +43,9 @@ foo      bar      default
 
 ### API
 
-The module exports a readline instance. [See node core module `realine` documentation](https://nodejs.org/api/readline.html) for more detail on its methods.
+The module exports a readline instance.
+
+[See node core module `realine` documentation](https://nodejs.org/api/readline.html) for more detail on its methods.
 
 ### install
 
