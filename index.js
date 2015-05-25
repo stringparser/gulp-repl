@@ -28,7 +28,7 @@ var repl = readline.createInterface({
 //
 repl.on('line', function onLine(line){
   line = line.trim();
-  if(!line){ return gulp.repl.prompt(); }
+  if(!line){ return repl.prompt(); }
   var runner = gulp.parallel || gulp.start;
   var result = runner.apply(gulp, line.split(/[ ]+/));
   if(typeof result === 'function'){ // gulp#4.0
