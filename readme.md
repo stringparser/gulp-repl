@@ -45,7 +45,7 @@ foo      bar      default
 
 The module exports a readline instance.
 
-[See node core module `realine` documentation](https://nodejs.org/api/readline.html) for more detail on its methods.
+[See node core module `readline` documentation](https://nodejs.org/api/readline.html) for more detail on its methods.
 
 ### install
 
