@@ -24,6 +24,14 @@ var repl = readline.createInterface({
   }
 });
 
+// exit on SIGINT, give a timestamp
+//
+repl.on('SIGINT', function(){
+  process.stdout.write('\n');
+  console.log(new Date());
+  process.exit();
+});
+
 // dispatch tasks only if line wasn't empty
 //
 repl.on('line', function onLine(line){
