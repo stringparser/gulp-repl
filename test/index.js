@@ -1,6 +1,6 @@
 'use strict';
 
-require('should');
+var should = require('should');
 
 describe('gulp-repl', function(){
   var gulp = require('gulp');
@@ -16,5 +16,13 @@ describe('gulp-repl', function(){
     gulp.task('one', function(cb){ one = true; cb(); });
     gulp.task('two', function(cb){ two = true; done(); cb(); });
     repl.emit('line', 'one two');
+  });
+
+  it('undefined tasks should not run', function(){
+    gulp.task('one', function(){});
+    var tasks = gulp.tasks || gulp._registry._tasks;
+    should.exist(tasks);
+
+    repl.emit('line', 'whatever');
   });
 });
