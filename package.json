@@ -23,9 +23,6 @@
     "url": "https://github.com/stringparser/gulp-repl/issues"
   },
   "homepage": "https://github.com/stringparser/gulp-repl#readme",
-  "dependencies": {
-    "gulp-util": "^3.0.4"
-  },
   "devDependencies": {
     "gulp": "^3.x",
     "jshint": "*",

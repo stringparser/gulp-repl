@@ -5,9 +5,8 @@
 try {
   var gulp = require('gulp');
 } catch (err){
-  var gutil = require('gulp-util');
-  gutil.log('gulp is not installed locally');
-  gutil.log('try `npm install gulp`');
+  console.log('gulp is not installed locally');
+  console.log('try `npm install gulp`');
   process.exit(1);
 }
 
