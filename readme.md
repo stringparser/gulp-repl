@@ -1,6 +1,6 @@
-## gulp-repl [![build][b-build]][x-travis][![NPM version][b-version]][gulp-repl]
+# gulp-repl [![NPM version][b-version]][gulp-repl]
 
-[![Join the chat at https://gitter.im/stringparser/gulp-repl](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/stringparser/gulp-repl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![build][b-build]][x-travis]
 
 Simple repl for gulp compatible with gulp#3.x and the future gulp#4.x.
 
@@ -9,7 +9,7 @@ Simple repl for gulp compatible with gulp#3.x and the future gulp#4.x.
 ```js
 // gulpfile example
 var gulp = require('gulp');
-var repl = require('gulp-repl');
+gulp.repl = require('gulp-repl')(gulp);
 
 gulp.task('foo', function (cb) {
 	// do foo stuff
@@ -21,7 +21,7 @@ gulp.task('bar', function (cb) {
 	cb();
 });
 
-gulp.task('default');
+gulp.task('default', ['one', 'two']);
 ```
 
 Then, on your terminal, you'll have a repl
