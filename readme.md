@@ -1,4 +1,4 @@
-# gulp-repl [![NPM version][b-version]][gulp-repl]
+# gulp-repl [![NPM version][b-version]][x-npm] [![downloads][badge-downloads]][x-npm]
 
 [![build][b-build]][x-travis]
 
@@ -59,7 +59,7 @@ $ npm install --save-dev gulp-repl
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Javier Carrillo
+Copyright (c) 2015-2016 Javier Carrillo
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -69,9 +69,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 <!-- links -->
 
-[x-travis]: https://travis-ci.org/stringparser/gulp-repl/builds
 [b-build]: https://travis-ci.org/stringparser/gulp-repl.svg?branch=master
+[x-travis]: https://travis-ci.org/stringparser/gulp-repl/builds
 [b-version]: http://img.shields.io/npm/v/gulp-repl.svg?style=flat-square
 
-[gulp-repl]: https://npmjs.com/gulp-repl
-[kramed-issues]: https://github.com/GitbookIO/kramed/issues
+[x-npm]: https://npmjs.com/gulp-repl
+[badge-downloads]: http://img.shields.io/npm/dm/gulp-repl.svg?style=flat-square
