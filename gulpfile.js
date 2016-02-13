@@ -1,7 +1,5 @@
 'use strict';
 
-require('gulp/bin/gulp');
-
 var gulp = require('gulp');
 gulp.repl = require('.')(gulp);
 
@@ -15,6 +13,4 @@ gulp.task('bar', function (cb) {
   cb();
 });
 
-gulp.task('default');
-
-gulp.repl.emit('line', 'foo bar');
+gulp.task('default', ['foo', 'bar']);
