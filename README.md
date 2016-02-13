@@ -68,10 +68,9 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 <!-- links -->
+[x-npm]: https://npmjs.com/gulp-repl
+[x-travis]: https://travis-ci.org/stringparser/gulp-repl/builds
 
 [b-build]: https://travis-ci.org/stringparser/gulp-repl.svg?branch=master
-[x-travis]: https://travis-ci.org/stringparser/gulp-repl/builds
 [b-version]: http://img.shields.io/npm/v/gulp-repl.svg?style=flat-square
-
-[x-npm]: https://npmjs.com/gulp-repl
 [badge-downloads]: http://img.shields.io/npm/dm/gulp-repl.svg?style=flat-square
