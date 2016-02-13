@@ -1,68 +1,73 @@
 'use strict';
 
-exports = module.exports = function (gulp){
-  var tasks = !gulp || gulp.tasks || (gulp._registry && gulp._registry._tasks);
-  if(!tasks){
-    throw new TypeError('pass a gulp instance to the module');
-  }
+exports = module.exports = gulpRepl;
 
+function gulpRepl(_, o){
+  // lazyyy
+  var util = require('./lib/util');
   var readline = require('readline');
-  var completer = require('./lib/completer');
 
-  // create a simple readline interface
-  //
+  var gulp = util.getGulp(_);
+  var tasks = util.getRegistry(gulp);
+
+  /**
+   * create a readline interface
+  **/
   var repl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    completer: function completion(line){
-      return completer(gulp, line);
+    input: o && o.input || process.stdin,
+    output: o && o.output || process.stdout,
+    completer: o && o.completer || function(line){
+      return util.completer(line, tasks);
     }
   });
 
-  // exit on SIGINT, give a timestamp
-  //
-  repl.on('SIGINT', function(){
-    process.stdout.write('\n');
-    console.log(new Date());
-    process.exit();
-  });
-
-  // dispatch tasks only if line wasn't empty
-  //
+  /**
+   * queue tasks when line is not empty
+  **/
   repl.on('line', function onLine(line){
     line = line.trim();
+
     if(!line){ return repl.prompt(); }
 
-    var tasks;
-    if(gulp._registry){
-      tasks = gulp._registry && gulp._registry._tasks;
-    } else { tasks = gulp.tasks; }
+    var queue = {found: [], notFound: []};
 
-    var notFound = [];
-    line = line.split(/[ ]+/).filter(function(name){
-      if(tasks && !tasks[name]){
-        notFound.push(name);
-      } else { return true; }
+    line.split(/[ ]+/).forEach(function(name, index, pending){
+      var tail = pending.slice(index).join(' ');
+      var task = tasks.get(tail) || tasks.get(name);
+
+      if(task){ queue.found.push(task.label || name); } else {
+        queue.notFound.push(name);
+      }
     });
 
-    if(notFound.length){
-      var plural = notFound.length > 1;
-      console.log(
-        ' Warning: `%s` task%s %s undefined',
-        notFound.join(', '),
+    if(queue.notFound.length){
+      var plural = queue.notFound.length > 1;
+      console.log(' `%s` task%s %s not defined yet',
+        queue.notFound,
         plural ? 's' : '',
         plural ? 'are' : 'is'
       );
+    }
 
-      if(!line.length){ return repl.prompt(); }
+    if(!queue.found.length){
+      return repl.prompt();
     }
 
     var runner = gulp.parallel || gulp.start;
-    var result = runner.apply(gulp, line);
+    var result = runner.apply(gulp, queue.found);
+    if(typeof result === 'function'){
+      result(); // gulp#4.0
+    }
+  });
 
-    // gulp#4.0
-    if(typeof result === 'function'){ result(); }
+  /**
+   * exit on SIGINT with a timestamp
+  **/
+  repl.on('SIGINT', function(){
+    process.stdout.write('\n');
+    console.log(new Date());
+    process.exit(0);
   });
 
   return repl;
-};
+}
