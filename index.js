@@ -8,7 +8,7 @@ function gulpRepl(_, o){
   var readline = require('readline');
 
   var gulp = util.getGulp(_);
-  var tasks = util.getRegistry(gulp);
+  var tasks = util.getTasks(gulp);
 
   /**
    * create a readline interface
@@ -26,24 +26,15 @@ function gulpRepl(_, o){
   **/
   repl.on('line', function onLine(line){
     line = line.trim();
-
     if(!line){ return repl.prompt(); }
 
-    var queue = {found: [], notFound: []};
-
-    line.split(/[ ]+/).forEach(function(name, index, pending){
-      var tail = pending.slice(index).join(' ');
-      var task = tasks.get(tail) || tasks.get(name);
-
-      if(task){ queue.found.push(task.label || name); } else {
-        queue.notFound.push(name);
-      }
-    });
+    line = line.split(/[, ]+/);
+    var queue = util.getQueue(line, tasks);
 
     if(queue.notFound.length){
       var plural = queue.notFound.length > 1;
       console.log(' `%s` task%s %s not defined yet',
-        queue.notFound,
+        queue.notFound.join(', '),
         plural ? 's' : '',
         plural ? 'are' : 'is'
       );
