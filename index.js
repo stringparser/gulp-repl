@@ -28,7 +28,6 @@ function gulpRepl(_, o){
     line = line.trim();
     if(!line){ return repl.prompt(); }
 
-    line = line.split(/[, ]+/);
     var queue = util.getQueue(line, tasks);
 
     if(queue.notFound.length){
