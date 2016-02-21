@@ -7,13 +7,12 @@ function gulpRepl(_gulp_){
   var util = require('./lib/util');
   var gulp = util.getGulp(_gulp_);
   var tasks = util.getTasks(gulp);
-  var runner = gulp.start || gulp.parallel;
-  var readline = require('readline');
+  var runner = gulp.parallel || gulp.start;
 
   /**
    * create a readline interface
   **/
-  var repl = readline.createInterface({
+  var repl = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout,
     completer: function(line){
