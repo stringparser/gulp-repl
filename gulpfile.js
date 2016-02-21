@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-gulp.repl = require('.')(gulp);
+gulp.repl = require('./.')(gulp);
 
 gulp.task('foo', function (cb) {
   // do foo stuff
@@ -17,4 +17,4 @@ gulp.task('watch', function(cb){
 
 });
 
-gulp.task('default', ['foo', 'watch', 'bar']);
+gulp.task('default', ['foo', 'bar']);
