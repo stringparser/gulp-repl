@@ -40,12 +40,10 @@ function gulpRepl(_gulp_){
       return repl.prompt();
     }
 
-    queue.found.forEach(function(taskName){
-      var result = runner.call(gulp, taskName);
-      if(typeof result === 'function'){
-        result(); // gulp#4.0
-      }
-    });
+    var result = runner.apply(gulp, queue.found);
+    if(typeof result === 'function'){
+      result(); // gulp#4.0
+    }
   });
 
   /**
