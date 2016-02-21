@@ -2,21 +2,21 @@
 
 exports = module.exports = gulpRepl;
 
-function gulpRepl(_, o){
+function gulpRepl(_gulp_){
   // lazyyy
   var util = require('./lib/util');
-  var readline = require('readline');
-
-  var gulp = util.getGulp(_);
+  var gulp = util.getGulp(_gulp_);
   var tasks = util.getTasks(gulp);
+  var runner = gulp.start || gulp.parallel;
+  var readline = require('readline');
 
   /**
    * create a readline interface
   **/
   var repl = readline.createInterface({
-    input: o && o.input || process.stdin,
-    output: o && o.output || process.stdout,
-    completer: o && o.completer || function(line){
+    input: process.stdin,
+    output: process.stdout,
+    completer: function(line){
       return util.completer(line, tasks);
     }
   });
@@ -25,9 +25,6 @@ function gulpRepl(_, o){
    * queue tasks when line is not empty
   **/
   repl.on('line', function onLine(line){
-    line = line.trim();
-    if(!line){ return repl.prompt(); }
-
     var queue = util.getQueue(line, tasks);
 
     if(queue.notFound.length){
@@ -43,11 +40,12 @@ function gulpRepl(_, o){
       return repl.prompt();
     }
 
-    var runner = gulp.parallel || gulp.start;
-    var result = runner.apply(gulp, queue.found);
-    if(typeof result === 'function'){
-      result(); // gulp#4.0
-    }
+    queue.found.forEach(function(taskName){
+      var result = runner.call(gulp, taskName);
+      if(typeof result === 'function'){
+        result(); // gulp#4.0
+      }
+    });
   });
 
   /**
@@ -58,6 +56,8 @@ function gulpRepl(_, o){
     console.log(new Date());
     process.exit(0);
   });
+
+  util.waitToPrompt(gulp, repl);
 
   return repl;
 }
