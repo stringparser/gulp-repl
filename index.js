@@ -19,7 +19,7 @@ var repl = require('readline').createInterface({
 /**
  * queue tasks when line is not empty
 **/
-repl.on('line', function onLine(input){
+repl.on('line', function(input){
   var line = input.trim();
   if(!line){ return repl.prompt(); }
 
@@ -69,16 +69,8 @@ repl.on('SIGINT', function(){
 /**
  * add the given gulp instance to the instances array
 **/
-function gulpRepl(gulp){
-  if(!gulp || typeof gulp.task !== 'function'){
-    try {
-      gulp = require('gulp');
-    } catch (err){
-      console.log('gulp is not installed locally');
-      console.log('try `npm install gulp`');
-      process.exit(1);
-    }
-  }
+function gulpRepl(_gulp_){
+  var gulp = util.getGulp(_gulp_);
 
   var inInstances = Boolean(
     exports.instances.filter(function(instance){
@@ -87,34 +79,11 @@ function gulpRepl(gulp){
   );
   if(inInstances){ return repl; }
 
-  var tasks = {
-    obj: (
-      (gulp._registry && gulp._registry._tasks) || // gulp#4
-      (gulp.tasks && gulp.tasks.store) || // gulp-runtime
-      gulp.tasks // gulp#3
-    )
-  };
-
-  if(typeof (gulp.tasks && gulp.tasks.get) === 'function'){
-    tasks.get = function(name, line){
-      return gulp.tasks.get(line);
-    };
-  } else {
-    tasks.get = function(name, line){
-      return tasks.obj[name] && {
-        match: name,
-        notFound: line.slice(name.length)
-      };
-    };
-  }
-
   exports.instances.push({
     gulp: gulp,
-    tasks: tasks,
+    tasks: util.getTasks(gulp),
     runner: gulp.parallel || gulp.start
   });
-
-  util.waitToPrompt(gulp, repl);
 
   return repl;
 }
