@@ -11,7 +11,7 @@ exports.instances = [];
 var repl = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout,
-  completer: function(line){
+  completer: function onCompletion(line){
     return util.completer(line, exports.instances);
   }
 });
@@ -19,7 +19,7 @@ var repl = require('readline').createInterface({
 /**
  * queue tasks when line is not empty
 **/
-repl.on('line', function(input){
+repl.on('line', function onLine(input){
   var line = input.trim();
   if(!line){ return repl.prompt(); }
 
@@ -60,7 +60,7 @@ repl.on('line', function(input){
 /**
  * exit on SIGINT with a timestamp
 **/
-repl.on('SIGINT', function(){
+repl.on('SIGINT', function onSIGINT(){
   process.stdout.write('\n');
   console.log(new Date());
   process.exit(0);
