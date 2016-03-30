@@ -21,7 +21,7 @@ var repl = require('readline').createInterface({
 **/
 repl.on('line', function onLine(input){
   var line = input.trim();
-  if(!line){ return repl.prompt(); }
+  if(!line){ return repl.waitToPrompt(2); }
 
   var queue = {
     found: [],
@@ -74,20 +74,21 @@ var write = process.stdout.write;
 **/
 repl.waitToPrompt = function(bailAfter){
   bailAfter = bailAfter || Infinity;
+  var writes = 0;
+
+  clearTimeout(timer);
   process.stdout.write = (function(stub){
-    var writes = 0;
     return (function(/* arguments */){
-      ++writes;
-      clearTimeout(timer);
       stub.apply(process.stdout, arguments);
 
-      if(writes > bailAfter){
+      clearTimeout(timer);
+      if(++writes > bailAfter){
         process.stdout.write = write;
       } else {
         timer = setTimeout(function(){
           process.stdout.write = write;
           repl.prompt();
-        }, 50);
+        }, 500);
       }
     });
   })(process.stdout.write);
