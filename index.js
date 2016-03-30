@@ -40,13 +40,14 @@ repl.on('line', function onLine(input){
   });
 
   if(queue.notFound.length){
+    repl.waitToPrompt(2);
     var plural = queue.notFound.length > 1;
     console.log(' `%s` task%s %s not defined yet',
       queue.notFound.join(', '),
       plural ? 's' : '',
       plural ? 'are' : 'is'
     );
-    return repl.prompt();
+    return;
   }
 
   queue.found.forEach(function(found){
@@ -65,6 +66,34 @@ repl.on('SIGINT', function onSIGINT(){
   console.log(new Date());
   process.exit(0);
 });
+
+var timer;
+var write = process.stdout.write;
+/**
+ * wait for stdout to prompt
+**/
+repl.waitToPrompt = function(bailAfter){
+  bailAfter = bailAfter || Infinity;
+  process.stdout.write = (function(stub){
+    var writes = 0;
+    return (function(/* arguments */){
+      ++writes;
+      clearTimeout(timer);
+      stub.apply(process.stdout, arguments);
+
+      if(writes > bailAfter){
+        process.stdout.write = write;
+      } else {
+        timer = setTimeout(function(){
+          process.stdout.write = write;
+          repl.prompt();
+        }, 50);
+      }
+    });
+  })(process.stdout.write);
+
+  return this;
+};
 
 /**
  * add the given gulp instance to the instances array
