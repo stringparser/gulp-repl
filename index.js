@@ -54,8 +54,6 @@ repl.on('line', function onLine(input){
       }
     });
   }
-
-  repl.waitToPrompt(2);
 });
 
 /**
@@ -66,35 +64,6 @@ repl.on('SIGINT', function onSIGINT(){
   console.log(new Date());
   process.exit(0);
 });
-
-var timer;
-var write = process.stdout.write;
-/**
- * wait for stdout to prompt
-**/
-repl.waitToPrompt = function(bailAfter){
-  bailAfter = bailAfter || Infinity;
-  var writes = 0;
-
-  clearTimeout(timer);
-  process.stdout.write = (function(stub){
-    return (function(/* arguments */){
-      stub.apply(process.stdout, arguments);
-
-      clearTimeout(timer);
-      if(++writes > bailAfter){
-        process.stdout.write = write;
-      } else {
-        timer = setTimeout(function(){
-          process.stdout.write = write;
-          repl.prompt();
-        }, 500);
-      }
-    });
-  })(process.stdout.write);
-
-  return this;
-};
 
 /**
  * add the given gulp instance to the instances array
