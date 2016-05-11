@@ -11,7 +11,7 @@ exports.instances = [];
 var repl = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout,
-  completer: function(line){
+  completer: function onCompletion(line){
     return util.completer(line, exports.instances);
   }
 });
@@ -46,21 +46,20 @@ repl.on('line', function onLine(input){
       plural ? 's' : '',
       plural ? 'are' : 'is'
     );
-    return repl.prompt();
+  } else {
+    queue.found.forEach(function(found){
+      var result = found.inst.runner.apply(found.inst.gulp, found.tasks);
+      if(typeof result === 'function'){
+        result(); // gulp#4.0
+      }
+    });
   }
-
-  queue.found.forEach(function(found){
-    var result = found.inst.runner.apply(found.inst.gulp, found.tasks);
-    if(typeof result === 'function'){
-      result(); // gulp#4.0
-    }
-  });
 });
 
 /**
  * exit on SIGINT with a timestamp
 **/
-repl.on('SIGINT', function(){
+repl.on('SIGINT', function onSIGINT(){
   process.stdout.write('\n');
   console.log(new Date());
   process.exit(0);
@@ -69,16 +68,8 @@ repl.on('SIGINT', function(){
 /**
  * add the given gulp instance to the instances array
 **/
-function gulpRepl(gulp){
-  if(!gulp || typeof gulp.task !== 'function'){
-    try {
-      gulp = require('gulp');
-    } catch (err){
-      console.log('gulp is not installed locally');
-      console.log('try `npm install gulp`');
-      process.exit(1);
-    }
-  }
+function gulpRepl(_gulp_){
+  var gulp = util.getGulp(_gulp_);
 
   var inInstances = Boolean(
     exports.instances.filter(function(instance){
@@ -87,34 +78,11 @@ function gulpRepl(gulp){
   );
   if(inInstances){ return repl; }
 
-  var tasks = {
-    obj: (
-      (gulp._registry && gulp._registry._tasks) || // gulp#4
-      (gulp.tasks && gulp.tasks.store) || // gulp-runtime
-      gulp.tasks // gulp#3
-    )
-  };
-
-  if(typeof (gulp.tasks && gulp.tasks.get) === 'function'){
-    tasks.get = function(name, line){
-      return gulp.tasks.get(line);
-    };
-  } else {
-    tasks.get = function(name, line){
-      return tasks.obj[name] && {
-        match: name,
-        notFound: line.slice(name.length)
-      };
-    };
-  }
-
   exports.instances.push({
     gulp: gulp,
-    tasks: tasks,
-    runner: gulp.parallel || gulp.start
+    tasks: util.getTasks(gulp),
+    runner: gulp.start
   });
-
-  util.waitToPrompt(gulp, repl);
 
   return repl;
 }
