@@ -22,6 +22,9 @@ gulp.task('bar', function (cb) {
 });
 
 gulp.task('default');
+
+// same as writing foo bar on the command line
+gulp.repl.emit('line', 'foo bar');
 ```
 
 Then, on your terminal, you'll have a repl
