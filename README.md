@@ -21,7 +21,7 @@ gulp.task('bar', function (cb) {
 	cb();
 });
 
-gulp.task('default', ['one', 'two']);
+gulp.task('default');
 ```
 
 Then, on your terminal, you'll have a repl
@@ -45,9 +45,9 @@ foo      bar      default
 
 ### API
 
-The module exports a readline instance.
+The module exports a `readline` interface.
 
-[See node core module `readline` documentation](https://nodejs.org/api/readline.html) for more detail on its methods.
+For more information [see node's core module `readline` documentation](https://nodejs.org/api/readline.html).
 
 ### install
 
