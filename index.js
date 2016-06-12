@@ -41,19 +41,22 @@ repl.on('line', function onLine(input){
 
   if(queue.notFound.length){
     var plural = queue.notFound.length > 1;
+
     console.log(' `%s` task%s %s not defined yet',
       queue.notFound.join(', '),
       plural ? 's' : '',
       plural ? 'are' : 'is'
     );
-  } else {
-    queue.found.forEach(function(found){
-      var result = found.inst.runner.apply(found.inst.gulp, found.tasks);
-      if(typeof result === 'function'){
-        result(); // gulp#4.0
-      }
-    });
+
+    return repl.prompt();
   }
+
+  queue.found.forEach(function(found){
+    var result = found.inst.runner.apply(found.inst.gulp, found.tasks);
+    if(typeof result === 'function'){
+      result(); // gulp#4.0
+    }
+  });
 });
 
 /**
