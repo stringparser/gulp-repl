@@ -34,9 +34,17 @@ it('should dispatch registered tasks', function(done){
   }
 });
 
-it('undefined tasks should not run', function(){
+it('undefined tasks should not run', function(done){
   should.exist(gulp.tasks || gulp._registry._tasks);
-  repl.emit('line', 'whatever');
+  var prompt = repl.prompt;
+
+  repl.prompt = function(){
+    repl.prompt = prompt;
+    prompt.apply(repl, arguments);
+    done();
+  };
+
+  repl.emit('line', 'not found task');
 });
 
 it('should handle more than one instance', function (done){
@@ -101,4 +109,19 @@ it('should run found tasks indenpently of instances', function (done){
     pile.should.containDeep(['one', 'two']);
     done();
   }
+});
+
+it('should prompt after not found tasks', function (done){
+  var gulp3 = new gulp.constructor();
+  gulpRepl(gulp3);
+
+  var prompt = repl.prompt;
+
+  repl.prompt = function(){
+    repl.prompt = prompt;
+    prompt.apply(repl, arguments);
+    done();
+  };
+
+  repl.emit('line', 'not found task');
 });
