@@ -84,7 +84,7 @@ function gulpRepl(_gulp_){
   exports.instances.push({
     gulp: gulp,
     tasks: util.getTasks(gulp),
-    runner: gulp.start
+    runner: gulp.start || gulp.parallel
   });
 
   return repl;
