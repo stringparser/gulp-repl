@@ -58,6 +58,22 @@ For more information [see node's core module `readline` documentation](https://n
 $ npm install --save-dev gulp-repl
 ```
 
+## Changelog
+
+[v1.1.2][v1.1.2]:
+
+- docs: add changelog
+- next_release: patch release
+- fix: `gulp.parallel` as task runner when `gulp.start` is undefined
+
+[v1.1.1][v1.1.1]:
+
+- fix: make the repl prompt after not found tasks
+- fix: line end matches
+
+[v1.1.0][v1.1.0]:
+- manage multiple gulp instances
+
 ### license
 
 The MIT License (MIT)
@@ -77,3 +93,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [b-build]: https://travis-ci.org/stringparser/gulp-repl.svg?branch=master
 [b-version]: http://img.shields.io/npm/v/gulp-repl.svg?style=flat-square
 [badge-downloads]: http://img.shields.io/npm/dm/gulp-repl.svg?style=flat-square
+
+
+[v1.1.2]: https://github.com/stringparser/gulp-repl/commit/6f4655ca1a667ca04d2a668a175055f9b4437d65
+[v1.1.1]: https://github.com/stringparser/gulp-repl/commit/6f4655ca1a667ca04d2a668a175055f9b4437d65
+[v1.1.0]: https://github.com/stringparser/gulp-repl/commit/71a2301233a92d68dbfd7e7a1493a38be72d0a0e
