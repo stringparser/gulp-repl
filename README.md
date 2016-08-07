@@ -95,6 +95,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [badge-downloads]: http://img.shields.io/npm/dm/gulp-repl.svg?style=flat-square
 
 
-[v1.1.2]: https://github.com/stringparser/gulp-repl/commit/6f4655ca1a667ca04d2a668a175055f9b4437d65
+[v1.1.2]: https://github.com/stringparser/gulp-repl/commit/572df8ce7cd9d4edd3a2190de021381671a295f0
 [v1.1.1]: https://github.com/stringparser/gulp-repl/commit/6f4655ca1a667ca04d2a668a175055f9b4437d65
 [v1.1.0]: https://github.com/stringparser/gulp-repl/commit/71a2301233a92d68dbfd7e7a1493a38be72d0a0e
