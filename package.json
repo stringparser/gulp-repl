@@ -14,12 +14,12 @@
   ],
   "devDependencies": {
     "gulp": "^3.x",
-    "jshint": "*",
+    "eslint": "^2.x.x",
     "mocha": "*",
     "should": "*"
   },
   "scripts": {
-    "lint": "jshint lib index.js --exclude ./node_modules",
+    "lint": "eslint lib examples test index.js",
     "test": "npm run-script lint && mocha test"
   },
   "dependencies": {
