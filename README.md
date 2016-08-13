@@ -116,7 +116,11 @@ function start(Gulp gulp)
 
 Takes a `gulp` instance as argument
 
-Adds the `gulp` instance tasks for the REPL and starts a REPL listening on `stdin` and writing on `stdout` and _returns_ a `readline.Interface` instance. Each of the commands typed to the REPL are looked up in each of the instances given on `add`.
+Adds the `gulp` instance tasks for the REPL.
+
+Starts a REPL listening on `stdin` and writing on `stdout`. Each of the commands typed to the REPL are looked up in each of the instances given on `add`.
+
+_returns_ a `readline.Interface` instance.
 
 [See node's core module `readline` documentation about the `readline.Interface`](https://nodejs.org/api/readline.html).
 
@@ -173,6 +177,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [b-version]: http://img.shields.io/npm/v/gulp-repl.svg?style=flat-square
 [badge-downloads]: http://img.shields.io/npm/dm/gulp-repl.svg?style=flat-square
 
+[v2.0.1]: https://github.com/stringparser/gulp-repl/commit/be44875927a42d8f08dcafa7984db0bfc423e0a3
 
 [v2.0.0]: https://github.com/stringparser/gulp-repl/commit/be44875927a42d8f08dcafa7984db0bfc423e0a3
 [v1.1.2]: https://github.com/stringparser/gulp-repl/commit/572df8ce7cd9d4edd3a2190de021381671a295f0
