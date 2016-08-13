@@ -5,10 +5,7 @@ var util = require('./lib/util');
 var repl = null;
 var instances = [];
 
-// add the instance to the repl and start it
-exports = module.exports = function (_gulp_) {
-  return exports.start(_gulp_);
-};
+exports = module.exports = {};
 
 // get the instance properties used by the REPL
 exports.get = function (gulp) {
@@ -60,7 +57,7 @@ exports.remove = function (_gulp_) {
 
 // create a readline instance if there is none
 exports.start = function (_gulp_) {
-  exports.add(_gulp_);
+  this.add(_gulp_);
 
   // only create one repl listening on stdin
   if (repl) { return repl; }
