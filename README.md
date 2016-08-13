@@ -63,20 +63,10 @@ foo      bar      default
 
 ### API
 
-The module exports a function
+The module exports a function that is an alias of [`start`](#gulpreplstart)
 
 ```js
-var repl = require('gulp-repl');
-```
-
-Calling the function with `gulp` creates a `readline` instance using `gulp` tasks as commands for a REPL.
-
-```js
-var gulp = require('gulp');
-var gulpREPL = require('repl');
-
-// to start the repl
-gulp.repl = gulpREPL.start(gulp);
+var gulpREPL = require('gulp-repl');
 ```
 
 #### gulpREPL.add
@@ -85,7 +75,7 @@ gulp.repl = gulpREPL.start(gulp);
 function add(Gulp gulp)
 ```
 
-Adds the given `gulp` instance for the REPL to be able to lookup and _returns_ the module again.
+Adds the `gulp` instance tasks for the REPL and _returns_ the module again.
 
 #### gulpREPL.remove
 
@@ -93,7 +83,7 @@ Adds the given `gulp` instance for the REPL to be able to lookup and _returns_ t
 function remove(Gulp gulp)
 ```
 
-Removes the given `gulp` instance for the REPL to be able to lookup and _returns_ the module again.
+Removes the `gulp` instance tasks from the REPL and _returns_ the module again.
 
 #### gulpREPL.reset
 
@@ -122,7 +112,9 @@ _returns_
 function start(Gulp gulp)
 ```
 
-Starts a REPL listening on `stdin` and writing on `stdout` and _returns_ a `readline.Interface` instance. Each of the commands typed to the REPL are looked up in each of the instances given on `add`.
+Takes a `gulp` instance as argument
+
+Adds the `gulp` instance tasks for the REPL and starts a REPL listening on `stdin` and writing on `stdout` and _returns_ a `readline.Interface` instance. Each of the commands typed to the REPL are looked up in each of the instances given on `add`.
 
 [See node's core module `readline` documentation about the `readline.Interface`](https://nodejs.org/api/readline.html).
 
