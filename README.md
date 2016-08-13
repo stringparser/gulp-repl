@@ -134,9 +134,16 @@ $ npm install --save-dev gulp-repl
 ## Changelog
 
 [v2.0.1][v2.0.1]:
+<<<<<<< HEAD
 - docs: remove docs of exporting a function
 - test: small fix to use `repl.start` instead of the `module.exports`
 - dev: make the `module.exports` an object
+=======
+- test: small fix to use `repl.start` instead of the `module.exports`
+- docs: remove docs of exporting a function
+- docs: small fix on the docs
+- version bump
+>>>>>>> v2.0.1
 
 [v2.0.0][v2.0.0]:
 - docs: add new api docs
@@ -177,7 +184,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [b-version]: http://img.shields.io/npm/v/gulp-repl.svg?style=flat-square
 [badge-downloads]: http://img.shields.io/npm/dm/gulp-repl.svg?style=flat-square
 
-[v2.0.1]: https://github.com/stringparser/gulp-repl/commit/be44875927a42d8f08dcafa7984db0bfc423e0a3
+[v2.0.1]: https://github.com/stringparser/gulp-repl/commit/4420f55db8f9a4887e5a8bd82976a8930e12fb50
 
 [v2.0.0]: https://github.com/stringparser/gulp-repl/commit/be44875927a42d8f08dcafa7984db0bfc423e0a3
 [v1.1.2]: https://github.com/stringparser/gulp-repl/commit/572df8ce7cd9d4edd3a2190de021381671a295f0
