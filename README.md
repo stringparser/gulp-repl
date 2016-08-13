@@ -9,25 +9,40 @@ Simple repl for gulp compatible with gulp#3.x and the future gulp#4.x.
 ```js
 // gulpfile example
 var gulp = require('gulp');
-gulp.repl = require('gulp-repl')(gulp);
+var repl = require('gulp-repl');
+
+gulp.task('repl-start', function (cb) {
+  gulp.repl = repl(gulp);
+});
+
+gulp.task('repl-stop', function (cb) {
+  if (gulp.repl) {
+    gulp.repl.close(); // same as nodejs.org/api/readline.html#readline_rl_close
+  }
+	cb();
+});
+
 
 gulp.task('foo', function (cb) {
-	// do foo stuff
-	cb();
+  // do foo stuff
+  cb();
 });
 
 gulp.task('bar', function (cb) {
-	// do bar stuff
-	cb();
+  // do bar stuff
+  cb();
 });
 
 gulp.task('default');
-
-// same as writing foo bar on the command line
-gulp.repl.emit('line', 'foo bar');
 ```
 
-Then, on your terminal, you'll have a repl
+Then, on your terminal write:
+
+```
+gulp repl-start
+```
+
+and you'll have a repl with:
 
 1. Press <kbd>Enter</kbd> to see the prompt
 1. write the tasks you want to run
@@ -48,9 +63,69 @@ foo      bar      default
 
 ### API
 
-The module exports a `readline` interface.
+The module exports a function
 
-For more information [see node's core module `readline` documentation](https://nodejs.org/api/readline.html).
+```js
+var repl = require('gulp-repl');
+```
+
+Calling the function with `gulp` creates a `readline` instance using `gulp` tasks as commands for a REPL.
+
+```js
+var gulp = require('gulp');
+var gulpREPL = require('repl');
+
+// to start the repl
+gulp.repl = gulpREPL.start(gulp);
+```
+
+#### gulpREPL.add
+
+```js
+function add(Gulp gulp)
+```
+
+Adds the given `gulp` instance for the REPL to be able to lookup and _returns_ the module again.
+
+#### gulpREPL.remove
+
+```js
+function remove(Gulp gulp)
+```
+
+Removes the given `gulp` instance for the REPL to be able to lookup and _returns_ the module again.
+
+#### gulpREPL.reset
+
+```js
+function reset()
+```
+
+Removes all of the previously added instances and _returns_ the module again.
+
+#### gulpREPL.get
+
+```js
+function get(Gulp gulp)
+```
+
+Takes a `gulp` instance as argument
+
+_returns_
+- `null` if the `gulp` instance wasn't stored yet
+- all of the stored instances if no arguments are given
+- metadata stored for the given `gulp` instance if was already stored
+
+#### gulpREPL.start
+
+```js
+function start(Gulp gulp)
+```
+
+Starts a REPL listening on `stdin` and writing on `stdout` and _returns_ a `readline.Interface` instance. Each of the commands typed to the REPL are looked up in each of the instances given on `add`.
+
+[See node's core module `readline` documentation about the `readline.Interface`](https://nodejs.org/api/readline.html).
+
 
 ### install
 
@@ -59,6 +134,11 @@ $ npm install --save-dev gulp-repl
 ```
 
 ## Changelog
+
+[v2.0.0][v2.0.0]:
+- docs: add new api docs
+- test: split test into files for each api method
+- dev: separate module into add, get, remove, reset and start
 
 [v1.1.2][v1.1.2]:
 
@@ -95,6 +175,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [badge-downloads]: http://img.shields.io/npm/dm/gulp-repl.svg?style=flat-square
 
 
+[v2.0.0]: https://github.com/stringparser/gulp-repl/commit/572df8ce7cd9d4edd3a2190de021381671a295f0
 [v1.1.2]: https://github.com/stringparser/gulp-repl/commit/572df8ce7cd9d4edd3a2190de021381671a295f0
 [v1.1.1]: https://github.com/stringparser/gulp-repl/commit/6f4655ca1a667ca04d2a668a175055f9b4437d65
 [v1.1.0]: https://github.com/stringparser/gulp-repl/commit/71a2301233a92d68dbfd7e7a1493a38be72d0a0e
