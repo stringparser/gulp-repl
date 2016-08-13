@@ -12,7 +12,7 @@ var gulp = require('gulp');
 var repl = require('gulp-repl');
 
 gulp.task('repl-start', function (cb) {
-  gulp.repl = repl(gulp);
+  gulp.repl = repl.start(gulp);
 });
 
 gulp.task('repl-stop', function (cb) {
@@ -63,13 +63,15 @@ foo      bar      default
 
 ### API
 
-The module exports a function that is an alias of [`start`](#gulpreplstart)
+The module exports a function
 
 ```js
-var gulpREPL = require('gulp-repl');
+var repl = require('gulp-repl');
 ```
 
-#### gulpREPL.add
+with the following methods
+
+#### repl.add
 
 ```js
 function add(Gulp gulp)
@@ -77,7 +79,7 @@ function add(Gulp gulp)
 
 Adds the `gulp` instance tasks for the REPL and _returns_ the module again.
 
-#### gulpREPL.remove
+#### repl.remove
 
 ```js
 function remove(Gulp gulp)
@@ -85,7 +87,7 @@ function remove(Gulp gulp)
 
 Removes the `gulp` instance tasks from the REPL and _returns_ the module again.
 
-#### gulpREPL.reset
+#### repl.reset
 
 ```js
 function reset()
@@ -93,7 +95,7 @@ function reset()
 
 Removes all of the previously added instances and _returns_ the module again.
 
-#### gulpREPL.get
+#### repl.get
 
 ```js
 function get(Gulp gulp)
@@ -106,7 +108,7 @@ _returns_
 - all of the stored instances if no arguments are given
 - metadata stored for the given `gulp` instance if was already stored
 
-#### gulpREPL.start
+#### repl.start
 
 ```js
 function start(Gulp gulp)
@@ -126,6 +128,11 @@ $ npm install --save-dev gulp-repl
 ```
 
 ## Changelog
+
+[v2.0.1][v2.0.1]:
+- docs: remove docs of exporting a function
+- test: small fix to use `repl.start` instead of the `module.exports`
+- dev: make the `module.exports` an object
 
 [v2.0.0][v2.0.0]:
 - docs: add new api docs
