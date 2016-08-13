@@ -6,7 +6,7 @@ var Gulp = require('gulp').constructor;
 var should = require('should');
 
 var api = require('../.');
-var repl = api();
+var repl = api.start();
 
 fs.readdirSync(__dirname).forEach(function (file) {
   if (file === 'index.js') {
