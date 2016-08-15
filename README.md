@@ -19,7 +19,7 @@ gulp.task('repl-stop', function (cb) {
   if (gulp.repl) {
     gulp.repl.close(); // same as nodejs.org/api/readline.html#readline_rl_close
   }
-	cb();
+  cb();
 });
 
 
