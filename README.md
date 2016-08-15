@@ -134,16 +134,10 @@ $ npm install --save-dev gulp-repl
 ## Changelog
 
 [v2.0.1][v2.0.1]:
-<<<<<<< HEAD
-- docs: remove docs of exporting a function
-- test: small fix to use `repl.start` instead of the `module.exports`
-- dev: make the `module.exports` an object
-=======
 - test: small fix to use `repl.start` instead of the `module.exports`
 - docs: remove docs of exporting a function
 - docs: small fix on the docs
 - version bump
->>>>>>> v2.0.1
 
 [v2.0.0][v2.0.0]:
 - docs: add new api docs
