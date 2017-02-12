@@ -1,7 +1,7 @@
 {
   "name": "gulp-repl",
   "author": "Javier Carrillo <stringparser@gmail.com>",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "license": "MIT",
   "repository": "https://github.com/stringparser/gulp-repl",
   "description": "a simple repl for gulp",
