@@ -1,3 +1,6 @@
 node_modules
 dist
 coverage
+*.tgz
+test/verify-publish/node_modules
+test/verify-publish/package-lock.json

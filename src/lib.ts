@@ -1,5 +1,3 @@
-import uniq from 'lodash.uniq';
-
 export interface GulpLike {
   task?: (name: string, fn?: (cb?: () => void) => void) => void;
   start?: (...tasks: string[]) => (() => void) | void;
@@ -116,7 +114,7 @@ export function completer(
     completion.push(...matches.found);
   });
 
-  const hits = uniq(completion).filter((elem) => !elem.indexOf(line));
+  const hits = Array.from(new Set(completion)).filter((elem) => !elem.indexOf(line));
 
   return [hits.length ? hits : completion, line];
 }

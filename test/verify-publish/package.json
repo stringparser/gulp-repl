@@ -1,0 +1,9 @@
+{
+  "name": "gulp-repl-verify",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "gulp": "5.0.1",
+    "gulp-repl": "file:../../gulp-repl-3.0.0.tgz"
+  }
+}

@@ -2,38 +2,41 @@
 
 [![CI][b-build]][x-actions]
 
-Simple REPL for gulp compatible with gulp 3.x and gulp 4.x.
+Simple REPL for gulp.
 
 ### usage
 
-```js
-// gulpfile example
-var gulp = require('gulp');
-var repl = require('gulp-repl');
+```ts
+// gulpfile.ts
+import gulp from 'gulp';
+import repl from 'gulp-repl';
 
-gulp.task('repl-start', function (cb) {
+gulp.task('repl-start', (cb) => {
   gulp.repl = repl.start(gulp);
+  cb();
 });
 
-gulp.task('repl-stop', function (cb) {
+gulp.task('repl-stop', (cb) => {
   if (gulp.repl) {
     gulp.repl.close(); // same as nodejs.org/api/readline.html#readline_rl_close
   }
   cb();
 });
 
-gulp.task('foo', function (cb) {
+gulp.task('foo', (cb) => {
   // do foo stuff
   cb();
 });
 
-gulp.task('bar', function (cb) {
+gulp.task('bar', (cb) => {
   // do bar stuff
   cb();
 });
 
-gulp.task('default');
+gulp.task('default', gulp.series('foo', 'bar'));
 ```
+
+> **Note:** For `gulpfile.ts`, ensure `ts-node` or `tsx` is available. Use `gulpfile.js` with `require()` if you prefer plain JavaScript.
 
 Then, on your terminal write:
 
@@ -64,38 +67,38 @@ foo      bar      default
 
 The module exports an object with the following methods:
 
-```js
-var repl = require('gulp-repl');
+```ts
+import repl from 'gulp-repl';
 ```
 
 #### repl.add
 
-```js
-function add(Gulp gulp)
+```ts
+add(gulp: Gulp): typeof repl
 ```
 
 Adds the `gulp` instance tasks for the REPL and _returns_ the module again.
 
 #### repl.remove
 
-```js
-function remove(Gulp gulp)
+```ts
+remove(gulp: Gulp): typeof repl
 ```
 
 Removes the `gulp` instance tasks from the REPL and _returns_ the module again.
 
 #### repl.reset
 
-```js
-function reset()
+```ts
+reset(): typeof repl
 ```
 
 Removes all of the previously added instances and _returns_ the module again.
 
 #### repl.get
 
-```js
-function get(Gulp gulp)
+```ts
+get(gulp?: Gulp): ReplInstance[] | ReplInstance | null
 ```
 
 Takes a `gulp` instance as argument.
@@ -107,8 +110,8 @@ _returns_
 
 #### repl.start
 
-```js
-function start(Gulp gulp)
+```ts
+start(gulp?: Gulp): readline.Interface
 ```
 
 Takes a `gulp` instance as argument.
