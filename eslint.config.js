@@ -1,4 +1,5 @@
 const js = require('@eslint/js');
+const globals = require('globals');
 const tseslint = require('typescript-eslint');
 
 module.exports = tseslint.config(
@@ -6,6 +7,9 @@ module.exports = tseslint.config(
   ...tseslint.configs.recommended,
   {
     languageOptions: {
+      globals: {
+        ...globals.node,
+      },
       parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
