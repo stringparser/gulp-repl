@@ -8,32 +8,38 @@ Simple REPL for gulp.
 
 ```ts
 // gulpfile.ts
-import gulp from 'gulp';
+import gulp, { type TaskFunction } from 'gulp';
 import repl from 'gulp-repl';
 
-gulp.task('repl-start', (cb) => {
-  gulp.repl = repl.start(gulp);
-  cb();
-});
+const gulpWithRepl = gulp as typeof gulp & { repl?: ReturnType<typeof repl.start> };
 
-gulp.task('repl-stop', (cb) => {
-  if (gulp.repl) {
-    gulp.repl.close(); // same as nodejs.org/api/readline.html#readline_rl_close
+const replStart: TaskFunction = (done) => {
+  gulpWithRepl.repl = repl.start(gulp);
+  done();
+};
+
+const replStop: TaskFunction = (done) => {
+  if (gulpWithRepl.repl) {
+    gulpWithRepl.repl.close(); // same as nodejs.org/api/readline.html#readline_rl_close
   }
-  cb();
-});
+  done();
+};
 
-gulp.task('foo', (cb) => {
+const foo: TaskFunction = (done) => {
   // do foo stuff
-  cb();
-});
+  done();
+};
 
-gulp.task('bar', (cb) => {
+const bar: TaskFunction = (done) => {
   // do bar stuff
-  cb();
-});
+  done();
+};
 
-gulp.task('default', gulp.series('foo', 'bar'));
+exports['repl-start'] = replStart;
+exports['repl-stop'] = replStop;
+exports.foo = foo;
+exports.bar = bar;
+exports.default = gulp.series('foo', 'bar');
 ```
 
 > **Note:** For `gulpfile.ts`, ensure `ts-node` or `tsx` is available. Use `gulpfile.js` with `require()` if you prefer plain JavaScript.
@@ -132,7 +138,7 @@ $ npm install --save-dev gulp-repl
 
 ### requirements
 
-- Node.js >= 14.0.0
+- Node.js >= 20.0.0
 
 ### Changelog
 
