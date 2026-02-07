@@ -1,8 +1,8 @@
-# gulp-repl [![NPM version][b-version]][x-npm] [![downloads][badge-downloads]][x-npm]
+# gulp-repl
 
-[![CI][b-build]][x-actions]
+[![NPM version][b-version]][x-npm] [![downloads][badge-downloads]][x-npm] [![CI][b-build]][x-actions]
 
-Simple REPL for gulp.
+A simple REPL for gulp.
 
 ### usage
 

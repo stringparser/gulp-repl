@@ -1,6 +1,6 @@
 {
   "name": "gulp-repl",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A simple repl for gulp",
   "author": "Javier Carrillo <stringparser@gmail.com>",
   "license": "MIT",
