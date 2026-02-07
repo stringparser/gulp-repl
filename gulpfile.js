@@ -1,7 +1,7 @@
 'use strict';
 
-var gulp = require('gulp');
-gulp.repl = require('./.')(gulp);
+const gulp = require('gulp');
+gulp.repl = require('./dist').start(gulp);
 
 gulp.task('foo', function (cb) {
   setTimeout(cb, Math.random() * 1000);

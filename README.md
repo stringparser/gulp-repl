@@ -1,8 +1,8 @@
 # gulp-repl [![NPM version][b-version]][x-npm] [![downloads][badge-downloads]][x-npm]
 
-[![build][b-build]][x-travis]
+[![CI][b-build]][x-actions]
 
-Simple repl for gulp compatible with gulp#3.x and the future gulp#4.x.
+Simple REPL for gulp compatible with gulp 3.x and gulp 4.x.
 
 ### usage
 
@@ -21,7 +21,6 @@ gulp.task('repl-stop', function (cb) {
   }
   cb();
 });
-
 
 gulp.task('foo', function (cb) {
   // do foo stuff
@@ -42,11 +41,11 @@ Then, on your terminal write:
 gulp repl-start
 ```
 
-and you'll have a repl with:
+and you'll have a REPL with:
 
 1. Press <kbd>Enter</kbd> to see the prompt
-1. write the tasks you want to run
-1. Press <kbd>Tab</kbd> for completion
+2. Write the tasks you want to run
+3. Press <kbd>Tab</kbd> for completion
 
 ```
 $ gulp
@@ -63,13 +62,11 @@ foo      bar      default
 
 ### API
 
-The module exports a function
+The module exports an object with the following methods:
 
 ```js
 var repl = require('gulp-repl');
 ```
-
-with the following methods
 
 #### repl.add
 
@@ -101,7 +98,7 @@ Removes all of the previously added instances and _returns_ the module again.
 function get(Gulp gulp)
 ```
 
-Takes a `gulp` instance as argument
+Takes a `gulp` instance as argument.
 
 _returns_
 - `null` if the `gulp` instance wasn't stored yet
@@ -114,7 +111,7 @@ _returns_
 function start(Gulp gulp)
 ```
 
-Takes a `gulp` instance as argument
+Takes a `gulp` instance as argument.
 
 Adds the `gulp` instance tasks for the REPL.
 
@@ -124,14 +121,23 @@ _returns_ a `readline.Interface` instance.
 
 [See node's core module `readline` documentation about the `readline.Interface`](https://nodejs.org/api/readline.html).
 
-
 ### install
 
 ```
 $ npm install --save-dev gulp-repl
 ```
 
-## Changelog
+### requirements
+
+- Node.js >= 14.0.0
+
+### Changelog
+
+[v3.0.0][v3.0.0]:
+- Modernize codebase: TypeScript, Jest, ESLint
+- Add GitHub Actions CI (Node 20, 22, 24)
+- Pin package versions
+- Breaking: Output is now in `dist/`, requires build step before publish
 
 [v2.0.1][v2.0.1]:
 - test: small fix to use `repl.start` instead of the `module.exports`
@@ -145,13 +151,11 @@ $ npm install --save-dev gulp-repl
 - dev: separate module into add, get, remove, reset and start
 
 [v1.1.2][v1.1.2]:
-
 - docs: add changelog
 - next_release: patch release
 - fix: `gulp.parallel` as task runner when `gulp.start` is undefined
 
 [v1.1.1][v1.1.1]:
-
 - fix: make the repl prompt after not found tasks
 - fix: line end matches
 
@@ -172,14 +176,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 <!-- links -->
 [x-npm]: https://npmjs.com/gulp-repl
-[x-travis]: https://travis-ci.org/stringparser/gulp-repl/builds
+[x-actions]: https://github.com/stringparser/gulp-repl/actions
 
-[b-build]: https://travis-ci.org/stringparser/gulp-repl.svg?branch=master
+[b-build]: https://github.com/stringparser/gulp-repl/actions/workflows/ci.yml/badge.svg
 [b-version]: http://img.shields.io/npm/v/gulp-repl.svg?style=flat-square
 [badge-downloads]: http://img.shields.io/npm/dm/gulp-repl.svg?style=flat-square
 
+[v3.0.0]: https://github.com/stringparser/gulp-repl/releases/tag/v3.0.0
 [v2.0.1]: https://github.com/stringparser/gulp-repl/commit/4420f55db8f9a4887e5a8bd82976a8930e12fb50
-
 [v2.0.0]: https://github.com/stringparser/gulp-repl/commit/be44875927a42d8f08dcafa7984db0bfc423e0a3
 [v1.1.2]: https://github.com/stringparser/gulp-repl/commit/572df8ce7cd9d4edd3a2190de021381671a295f0
 [v1.1.1]: https://github.com/stringparser/gulp-repl/commit/6f4655ca1a667ca04d2a668a175055f9b4437d65

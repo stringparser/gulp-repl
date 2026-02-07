@@ -1,10 +1,10 @@
 {
   "name": "gulp-repl",
+  "version": "3.0.0",
+  "description": "a simple repl for gulp",
   "author": "Javier Carrillo <stringparser@gmail.com>",
-  "version": "2.0.3",
   "license": "MIT",
   "repository": "https://github.com/stringparser/gulp-repl",
-  "description": "a simple repl for gulp",
   "keywords": [
     "gulp",
     "repl",
@@ -12,17 +12,33 @@
     "gulpplugin",
     "completion"
   ],
-  "devDependencies": {
-    "gulp": "^3.x",
-    "eslint": "^2.x.x",
-    "mocha": "*",
-    "should": "*"
-  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "lint": "eslint lib examples test index.js",
-    "test": "npm run-script lint && mocha test"
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint src test",
+    "test": "jest",
+    "prepare": "npm run build"
   },
   "dependencies": {
-    "lodash.uniq": "^4.2.1"
+    "lodash.uniq": "4.5.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.16.0",
+    "@types/jest": "^29.5.14",
+    "@types/lodash.uniq": "4.5.9",
+    "@types/node": "22.10.1",
+    "eslint": "9.16.0",
+    "gulp": "4.0.2",
+    "jest": "29.7.0",
+    "ts-jest": "29.2.5",
+    "typescript": "5.7.2",
+    "typescript-eslint": "8.16.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
